@@ -1,3 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global CSS */
+
 body {
-    background-color: skyblue;
+	font-family: "Roboto", sans-serif;
+}
+
+.main-button {
+	display: block;
+	width: fit-content;
+	background-color: white;
+	border-radius: 10px;
+	padding: 10px 20px;
+	/* TODO */
 }

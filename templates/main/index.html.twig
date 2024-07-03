@@ -1,20 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
+{% block title %}
+	Accueil
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<div class="flex-1 mt-12 w-full">
+		<section class="flex flex-col items-center gap-4 bg-blue-600 px-4 pt-28 pb-24 text-center">
+			<h2 class="text-white text-5xl font-extrabold">Biblios</h2>
+			<p class="text-white text-xl">Catalogue en ligne de la médiathèque de Trifouillis-les-Oies</p>
+			<a class="main-button text-xl" href="#">Parcourez le catalogue</a>
+		</section>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+		<section class="flex flex-col items-center py-32">
+			<div class="max-w-[50%] px-3">
+				<h3 class="text-4xl font-medium mb-2">Biblios: qu'est-ce que c'est?</h3>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/cyril/Documents/Projets perso/Biblios/src/Controller/MainController.php</code></li>
-        <li>Your template at <code>/home/cyril/Documents/Projets perso/Biblios/templates/main/index.html.twig</code></li>
-    </ul>
-</div>
+				<p class="text-xl font-light mb-4">Biblios est la plateforme officielle de consultation du catalogue de la médiathèque de Trifouillis-les-Oies. Explorez notre collection avec une recherche efficace, vérifiez la disponibilité des ouvrages en temps réel, et effectuez des réservations en toute simplicité. Biblios s'engage pour faciliter l'accès à la culture et promouvoir la richesse de notre patrimoine littéraire.</p>
+
+				<p class="mb-4">Fonctionnalités clés :</p>
+
+				<ul class="list-disc list-inside pl-4">
+					<li>Recherche avancée de livres</li>
+					<li>Consultation en temps réel du statut des ouvrages (disponible, emprunté, indisponible)</li>
+					<li>Affichage détaillé des informations sur les livres</li>
+					<li>Processus de réservation simplifié</li>
+				</ul>
+			</div>
+		</section>
+	</div>
 {% endblock %}

@@ -1,17 +1,50 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+		<title>Biblios -
+			{% block title %}{% endblock %}
+		</title>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+		<link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet"> {% block stylesheets %}{% endblock %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+		{% block javascripts %}
+			{% block importmap %}
+				{{ importmap('app') }}
+			{% endblock %}
+		{% endblock %}
+	</head>
+	<body class="flex flex-col items-center min-h-screen">
+		<header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-[10%] py-4 bg-neutral-800">
+			<a href="/">
+				<h1 class="text-xl text-white">Biblios</h1>
+			</a>
+
+			<nav id='main-nav'>
+				<ul class="flex items-center gap-2">
+					<li>
+						<a class="p-2 text-white opacity-55 hover:opacity-75" href="#">Catalogue</a>
+					</li>
+
+					<li>
+						<a class="p-2 text-white opacity-55 hover:opacity-75" href="#">Se connecter</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+
+		{% block body %}{% endblock %}
+
+		<footer class="w-full py-12 bg-neutral-800">
+			<div class="px-4">
+				<p class="text-center text-white">Copyright &copy;
+					{{ 'now' | date("Y") }}
+					- Biblios</p>
+			</div>
+		</footer>
+	</body>
 </html>
