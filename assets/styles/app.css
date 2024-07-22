@@ -11,14 +11,16 @@ body {
 .main-button {
 	display: block;
 	width: fit-content;
-	background-color: white;
+	font-size: 1.2rem;
+	color: white;
+	background-color: rgb(37 99 235);
 	border-radius: 10px;
-	padding: 10px 20px;
+	padding: 5px 25px;
 	cursor: pointer;
-	border: 1px solid #f8f9fa;
+	border: 2px solid rgb(29 78 216);
+	transition: background-color 400ms;
 }
 
 .main-button:hover {
-	background-color: #d3d4d5;
-	border-color: #d3d4d5;
+	background-color: rgb(29 78 216);
 }

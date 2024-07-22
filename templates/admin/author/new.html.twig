@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Admin - Ajout d'un auteur
+{% endblock %}
+
+{% block main %}
+	<main class="flex-1 mt-12 w-full">
+		<section class='px-4 pt-12'>
+			<h2 class='text-5xl font-extrabold text-center'>Formulaire d'ajout d'un auteur</h2>
+
+			<div class="w-1/2 m-auto mt-10">
+				{{ form_start(form) }}
+				{{ form_row(form.name, {
+					label: "Nom",
+					widget_class: "rounded-lg w-full",
+					label_class: "block my-2"
+					}) }}
+
+				{{ form_row(form.dateOfBirth, {
+					label: "Date de naissance",
+					widget_class: "rounded-lg w-full",
+					label_class: "block my-2"
+					}) }}
+
+				{{ form_row(form.dateOfDeath, {
+					label: "Date de décès",
+					widget_class: "rounded-lg w-full",
+					label_class: "block my-2"
+					}) }}
+
+				{{ form_row(form.nationality, {
+					label: "Nationnalité",
+					widget_class: "rounded-lg w-full",
+					label_class: "block my-2"
+					}) }}
+
+				{{ form_row(form.books, {
+					label: "Livres",
+					widget_class: "rounded-lg w-full",
+					label_class: "block my-2"
+					}) }}
+
+				<button type="submit" class="main-button m-auto mt-4">Envoyer</button>
+				{{ form_end(form) }}
+			</div>
+		</section>
+	</main>
+{% endblock %}
