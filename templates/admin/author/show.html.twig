@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin - Page de l'auteur
+	{{ author is not null ? author.name : "" }}
+{% endblock %}
+
+{% block main %}
+	<main class="flex-1 mt-12 w-full px-10">
+		<section class='flex flex-col items-center gap-4 px-4 pt-12 text-center'>
+			{% if author is not null %}
+				<h2 class='text-5xl font-extrabold'>Page détails d'un auteur</h2>
+
+				<article class="w-1/2 m-auto flex flex-col items-center gap-5 border-2 rounded-2xl py-4 px-4">
+					<div class="w-full flex justify-between items-center px-4 my-5">
+						<h3 class="text-3xl">Nom complet:
+							{{ author.name }}</h3>
+
+						<p class="text-sm text-gray-600">Identifiant:
+							{{ author.id }}</p>
+					</div>
+
+					<div class="w-full flex justify-between px-4">
+						<p class="text-xl">Date de naissance:
+							{{ author.dateOfBirth|date('d M Y') }}</p>
+
+						<p class="text-xl">Date de décès:
+							{{ author.dateOfDeath is not null ? author.dateOfDeath|date('d M Y') : '-' }}</p>
+					</div>
+
+					<p class="self-start px-4">Nationalité:
+						{{ author.nationality }}</p>
+				</article>
+			{% else %}
+				<p class="text-xl text-center">L'auteur demandé n'existe pas...</p>
+
+			{% endif %}
+
+			<a href="{{ path('app_admin_author_index') }}" class="secondary-button">Retour à la liste d'auteurs</a>
+		</section>
+	</main>
+{% endblock %}

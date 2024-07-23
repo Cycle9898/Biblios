@@ -4,13 +4,31 @@
 {% endblock %}
 
 {% block main %}
-	<main class="flex-1 mt-12 w-full">
+	<main class="flex-1 mt-12 w-full px-10">
 		<section class='flex flex-col items-center gap-4 px-4 pt-12 text-center'>
 			<h2 class='text-5xl font-extrabold'>Page d'administration des auteurs</h2>
 
-			<a href="/admin/author/new" class="secondary-button">Ajouter un auteur</a>
+			<a href="{{ path('app_admin_author_new') }}" class="secondary-button self-end my-5">Ajouter un auteur</a>
 
-			<p>TODO: Affichage liste auteurs ?</p>
+			<h3 class="text-2xl mb-3">Listes des auteurs:</h3>
+
+			<ul class="w-full flex flex-col gap-2">
+				{% for author in authors %}
+					<li>
+						<a href="{{ path('app_admin_author_show', {id: author.id}) }}">
+							<article class="w-1/2 m-auto flex justify-between items-center border-2 rounded-2xl py-4 px-20">
+								<h4 class="text-xl">{{ author.name }}</h4>
+
+								<p class="text-sm text-gray-600">Identifiant:
+									{{ author.id }}</p>
+							</article>
+						</a>
+					</li>
+				{% else %}
+					<li>Aucun auteur trouvé...</li>
+				{% endfor %}
+			</ul>
+
 		</section>
 	</main>
 {% endblock %}
