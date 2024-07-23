@@ -14,33 +14,39 @@
 				{{ form_row(form.name, {
 					label: "Nom",
 					widget_class: "rounded-lg w-full",
-					label_class: "block my-2"
+					label_class: "block my-2",
+					error_item_class: "text-red-600"
 					}) }}
 
 				{{ form_row(form.dateOfBirth, {
 					label: "Date de naissance",
 					widget_class: "rounded-lg w-full",
-					label_class: "block my-2"
+					label_class: "block my-2",
+					error_item_class: "text-red-600"
 					}) }}
 
 				{{ form_row(form.dateOfDeath, {
 					label: "Date de décès",
 					widget_class: "rounded-lg w-full",
-					label_class: "block my-2"
+					label_class: "block my-2",
+					error_item_class: "text-red-600"
 					}) }}
 
 				{{ form_row(form.nationality, {
 					label: "Nationnalité",
 					widget_class: "rounded-lg w-full",
-					label_class: "block my-2"
+					label_class: "block my-2",
+					error_item_class: "text-red-600"
 					}) }}
 
 				{{ form_row(form.books, {
 					label: "Livres",
 					widget_class: "rounded-lg w-full",
-					label_class: "block my-2"
+					label_class: "block my-2",
+					error_item_class: "text-red-600"
 					}) }}
 
+				{{ form_errors(form) }}
 				<button type="submit" class="secondary-button m-auto mt-4">Envoyer</button>
 				{{ form_end(form) }}
 			</div>
