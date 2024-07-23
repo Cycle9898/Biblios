@@ -12,6 +12,23 @@ body {
 	display: block;
 	width: fit-content;
 	font-size: 1.2rem;
+	background-color: white;
+	border-radius: 10px;
+	padding: 5px 25px;
+	cursor: pointer;
+	border: 2px solid #f8f9fa;
+	transition: background-color 400ms;
+}
+
+.main-button:hover {
+	background-color: #d3d4d5;
+	border-color: #d3d4d5;
+}
+
+.secondary-button {
+	display: block;
+	width: fit-content;
+	font-size: 1.2rem;
 	color: white;
 	background-color: rgb(37 99 235);
 	border-radius: 10px;
@@ -21,6 +38,6 @@ body {
 	transition: background-color 400ms;
 }
 
-.main-button:hover {
+.secondary-button:hover {
 	background-color: rgb(29 78 216);
 }
