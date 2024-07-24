@@ -5,7 +5,7 @@
 
 {% block main %}
 	<main class="flex-1 mt-12 w-full px-10">
-		<section class='flex flex-col items-center gap-4 px-4 pt-12 text-center'>
+		<section class='flex flex-col items-center gap-4 px-4 pt-12 pb-6 text-center'>
 			<h2 class='text-5xl font-extrabold'>Page d'administration des auteurs</h2>
 
 			<a href="{{ path('app_admin_author_new') }}" class="secondary-button self-end my-5">Ajouter un auteur</a>
@@ -29,6 +29,9 @@
 				{% endfor %}
 			</ul>
 
+			{% if authors|length > 10 %}
+				{{ pagerfanta(authors) }}
+			{% endif %}
 		</section>
 	</main>
 {% endblock %}
