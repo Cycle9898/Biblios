@@ -29,6 +29,8 @@
 
 					<p class="self-start px-4">Nationalité:
 						{{ author.nationality }}</p>
+
+					<a href="{{ path('app_admin_author_edit', {id: author.id}) }}" class="secondary-button">Éditer</a>
 				</article>
 			{% else %}
 				<p class="text-xl text-center">L'auteur demandé n'existe pas...</p>
