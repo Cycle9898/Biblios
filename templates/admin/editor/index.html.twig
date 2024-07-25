@@ -28,6 +28,10 @@
 					<li>Aucun éditeur trouvé...</li>
 				{% endfor %}
 			</ul>
+
+			{% if editors|length > 10 %}
+				{{ pagerfanta(editors) }}
+			{% endif %}
 		</section>
 	</main>
 {% endblock %}
