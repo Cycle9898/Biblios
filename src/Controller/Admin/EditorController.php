@@ -31,9 +31,10 @@ class EditorController extends AbstractController
     }
 
     #[Route('/new', name: 'app_admin_editor_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $manager): Response
+    #[Route('/{id}/edit', 'app_admin_editor_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    public function new(?Editor $editor, Request $request, EntityManagerInterface $manager): Response
     {
-        $editor = new Editor();
+        $editor ??= new Editor();
         $form = $this->createForm(EditorType::class, $editor);
 
         $form->handleRequest($request);

@@ -18,6 +18,8 @@
 						<p class="text-sm text-gray-600">Identifiant:
 							{{ editor.id }}</p>
 					</div>
+
+					<a href="{{ path('app_admin_editor_edit', {id: editor.id}) }}" class="secondary-button">Éditer</a>
 				</article>
 			{% else %}
 				<p class="text-xl text-center">L'éditeur demandé n'existe pas...</p>
