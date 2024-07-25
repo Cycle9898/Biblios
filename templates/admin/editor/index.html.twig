@@ -4,13 +4,30 @@
 {% endblock %}
 
 {% block main %}
-	<main class="flex-1 mt-12 w-full">
-		<section class='flex flex-col items-center gap-4 px-4 pt-12 text-center'>
+	<main class="flex-1 mt-12 w-full px-10">
+		<section class='flex flex-col items-center gap-4 px-4 pt-12 pb-6 text-center'>
 			<h2 class='text-5xl font-extrabold'>Page d'administration des éditeurs</h2>
 
-			<a href="/admin/editor/new" class="secondary-button">Ajouter un éditeur</a>
+			<a href="{{ path('app_admin_editor_new') }}" class="secondary-button self-end my-5">Ajouter un éditeur</a>
 
-			<p>TODO: Affichage liste éditeurs ?</p>
+			<h3 class="text-2xl mb-3">Liste des éditeurs:</h3>
+
+			<ul class="w-full flex flex-col gap-2">
+				{% for editor in editors %}
+					<li>
+						<a href="{{ path('app_admin_editor_show', {id: editor.id}) }}">
+							<article class="w-1/2 m-auto flex justify-between items-center border-2 rounded-2xl py-4 px-20">
+								<h4 class="text-xl">{{ editor.name }}</h4>
+
+								<p class="text-sm text-gray-600">Identifiant:
+									{{ editor.id }}</p>
+							</article>
+						</a>
+					</li>
+				{% else %}
+					<li>Aucun éditeur trouvé...</li>
+				{% endfor %}
+			</ul>
 		</section>
 	</main>
 {% endblock %}

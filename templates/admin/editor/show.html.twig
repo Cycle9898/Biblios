@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin - Page de l'éditeur
+	{{ editor is not null ? editor.name : "" }}
+{% endblock %}
+
+{% block main %}
+	<main class="flex-1 mt-12 w-full px-10">
+		<section class='flex flex-col items-center gap-4 px-4 pt-12 pb-6 text-center'>
+			{% if editor is not null %}
+				<h2 class='text-5xl font-extrabold'>Page détails d'un éditeur</h2>
+
+				<article class="w-1/2 m-auto flex flex-col items-center gap-5 border-2 rounded-2xl py-4 px-4">
+					<div class="w-full flex justify-between items-center px-4 my-5">
+						<h3 class="text-3xl">Nom complet:
+							{{ editor.name }}</h3>
+
+						<p class="text-sm text-gray-600">Identifiant:
+							{{ editor.id }}</p>
+					</div>
+				</article>
+			{% else %}
+				<p class="text-xl text-center">L'éditeur demandé n'existe pas...</p>
+
+			{% endif %}
+
+			<a href="{{ path('app_admin_editor_index') }}" class="secondary-button">Retour à la liste des éditeurs</a>
+		</section>
+	</main>
+{% endblock %}
