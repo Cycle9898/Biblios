@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin - Page du livre
+	{{ book is not null ? book.title : "" }}
+{% endblock %}
+
+{% block main %}
+	<main class="flex-1 mt-12 w-full px-10">
+		<section class='flex flex-col items-center gap-4 px-4 pt-12 pb-6 text-center'>
+			{% if book is not null %}
+				<h2 class='text-5xl font-extrabold'>Page détails d'un livre</h2>
+
+				<article class="w-1/2 m-auto flex flex-col items-center gap-5 border-2 rounded-2xl py-4 px-4">
+					<div class="w-full flex justify-between items-center px-4 my-5">
+						<h3 class="text-3xl font-bold">{{ book.title }}</h3>
+
+						<p class="text-sm text-gray-600">Identifiant:
+							{{ book.id }}</p>
+					</div>
+
+					<div class="w-full flex justify-between items-start px-4 my-5">
+						<ul class="flex flex-col gap-5">
+							<li class="flex gap-2 items-center">
+								<h4 class="text-lg font-semibold">Date d'édition:</h4>
+								<span>{{ book.editedAt|date('d M Y') }}</span>
+							</li>
+
+							<li class="flex gap-2 items-center">
+								<h4 class="text-lg font-semibold">ISBN-13:</h4>
+								<span>{{ book.isbn }}</span>
+							</li>
+
+							<li class="flex flex-col gap-2 items-start">
+								<h4 class="text-lg font-semibold">{{ book.authors|length > 1 ? "Auteurs:" : "Auteur:" }}</h4>
+
+								<ul class="flex flex-col gap-1">
+									{% for author in book.authors %}
+										<li>
+											<a href="{{path('app_admin_author_show',{id:author.id})}}">
+												<div class="border rounded py-1 px-5">{{ author.name }}</div>
+											</a>
+										</li>
+									{% else %}
+										<li>Auteur inconnu</li>
+									{% endfor %}
+								</ul>
+							</li>
+
+							<li class="flex flex-col gap-2 items-start">
+								<h4 class="text-lg font-semibold">Éditeur:</h4>
+
+								<a href="{{path('app_admin_editor_show',{id:book.editor.id})}}">
+									<div class="border rounded py-1 px-5">{{ book.editor.name }}</div>
+								</a>
+							</li>
+
+							<li class="flex gap-2 items-center">
+								<h4 class="text-lg font-semibold">Nombre de pages:</h4>
+								<span>{{ book.pageNumber }}</span>
+							</li>
+						</ul>
+
+						<div>
+							<img src="{{ book.cover }}" alt="Couverture de {{ book.title }}" class="max-w-80 h-auto rounded object-cover">
+						</div>
+					</div>
+
+					<div class="w-full flex flex-col gap-2 items-start px-4 my-5">
+						<h4 class="text-lg font-semibold">Synopsis :</h4>
+
+						<p class="text-start">{{ book.plot }}</p>
+					</div>
+				</article>
+			{% else %}
+				<p class="text-xl text-center">Le livre demandé n'existe pas...</p>
+
+			{% endif %}
+
+			<a href="{{ path('app_admin_book_index') }}" class="secondary-button">Retour à la liste des livres</a>
+		</section>
+	</main>
+{% endblock %}

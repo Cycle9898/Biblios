@@ -4,13 +4,30 @@
 {% endblock %}
 
 {% block main %}
-	<main class="flex-1 mt-12 w-full">
-		<section class='flex flex-col items-center gap-4 px-4 pt-12 text-center'>
+	<main class="flex-1 mt-12 w-full pw-10">
+		<section class='flex flex-col items-center gap-4 px-4 pt-12 pb-6 text-center'>
 			<h2 class='text-5xl font-extrabold'>Page d'administration des livres</h2>
 
-			<a href="/admin/book/new" class="secondary-button">Ajouter un livre</a>
+			<a href="{{ path('app_admin_book_new') }}" class="secondary-button self-end my-5">Ajouter un livre</a>
 
-			<p>TODO: Affichage liste livres ?</p>
+			<h3 class="text-2xl mb-3">Liste des livres:</h3>
+
+			<ul class="w-full flex flex-col gap-2">
+				{% for book in books %}
+					<li>
+						<a href="{{ path('app_admin_book_show', {id: book.id}) }}">
+							<article class="w-1/2 m-auto flex justify-between items-center border-2 rounded-2xl py-4 px-20">
+								<h4 class="text-xl">{{ book.title }}</h4>
+
+								<p class="text-sm text-gray-600">Identifiant:
+									{{ book.id }}</p>
+							</article>
+						</a>
+					</li>
+				{% else %}
+					<li>Aucun livre trouvé...</li>
+				{% endfor %}
+			</ul>
 		</section>
 	</main>
 {% endblock %}
