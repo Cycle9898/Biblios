@@ -28,6 +28,10 @@
 					<li>Aucun livre trouvé...</li>
 				{% endfor %}
 			</ul>
+
+			{% if books|length > 10 %}
+				{{ pagerfanta(books) }}
+			{% endif %}
 		</section>
 	</main>
 {% endblock %}
