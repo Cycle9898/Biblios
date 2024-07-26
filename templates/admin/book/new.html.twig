@@ -1,13 +1,18 @@
 {% extends 'base.html.twig' %}
 
+{% set titleAction = app.current_route == 'app_admin_book_new' ? 'ajout' : 'édition' %}
+
 {% block title %}
-	Admin - Ajout d'un livre
+	Admin -
+	{{ titleAction }}
+	d'un livre
 {% endblock %}
 
 {% block main %}
 	<main class="flex-1 mt-12 w-full">
 		<section class='px-4 pt-12 pb-6'>
-			<h2 class='text-5xl font-extrabold text-center'>Formulaire d'ajout d'un livre</h2>
+			<h2 class='text-5xl font-extrabold text-center'>Formulaire d'{{ titleAction }}
+				d'un livre</h2>
 
 			<div class="w-1/2 m-auto mt-10">
 				{{ form_start(form) }}
