@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page du livre
+	{{ book is not null ? book.title : "" }}
+{% endblock %}
+
+{% block main %}
+	<main class="flex-1 mt-12 w-full px-10">
+		<section class='flex flex-col items-center gap-4 px-4 pt-12 pb-6 text-center'>
+			{% if book is not null %}
+				<article class="grid grid-cols-2 grid-rows-1 gap-12 px-10">
+					<div class="justify-self-center min-w-[60%]">
+						<img src="{{ book.cover }}" alt="Couverture de {{ book.title }}" class="w-full h-auto rounded object-cover">
+					</div>
+
+					<div class="flex flex-col gap-12 items-start">
+						<div class="text-start">
+							<p class="text-xs">
+								<span class="font-medium">ISBN-13:
+								</span>
+								{{  book.isbn }}</p>
+
+							<h2 class="text-3xl font-bold py-2">{{ book.title }}</h2>
+
+							<p>
+								<span class="font-medium">{{ book.authors|length > 1 ? "Auteurs" : "Auteur" }}:
+								</span>
+								{{ book.authors|map(a => a.name)|join(', ') }}
+							</p>
+
+							<p>
+								<span class="font-medium">Éditeur:
+								</span>
+								{{ book.editor.name }}</p>
+
+							<div>
+								<span>{{ book.pageNumber }}{{ book.pageNumber is not null ? ' pages' }}</span>
+								-
+								<span>Édité le
+									{{ book.editedAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</span>
+							</div>
+
+							<p>
+								<span class="font-medium">Statut:
+								</span>
+								{{ book.status.getLabel() }}</p>
+						</div>
+
+						<div>
+							<p class="text-start text-lg">{{ book.plot }}</p>
+						</div>
+					</div>
+				</article>
+
+			{% else %}
+				<p class="text-xl text-center">Le livre demandé n'existe pas...</p>
+
+			{% endif %}
+
+			<a href="{{ path('app_book_index') }}" class="secondary-button mt-12">Retour à la liste des livres</a>
+		</section>
+	</main>
+{% endblock %}

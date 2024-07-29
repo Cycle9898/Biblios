@@ -21,10 +21,10 @@
 
 					<div class="w-full flex justify-between px-4">
 						<p class="text-xl">Date de naissance:
-							{{ author.dateOfBirth|date('d M Y') }}</p>
+							{{ author.dateOfBirth|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</p>
 
 						<p class="text-xl">Date de décès:
-							{{ author.dateOfDeath is not null ? author.dateOfDeath|date('d M Y') : '-' }}</p>
+							{{ author.dateOfDeath is not null ? author.dateOfDeath|format_datetime(locale='fr',pattern="dd MMMM YYYY") : '-' }}</p>
 					</div>
 
 					<p class="self-start px-4">Nationalité:

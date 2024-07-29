@@ -12,7 +12,7 @@
 				{% for book in books %}
 					<li>
 						<article class="h-full m-auto flex flex-col items-center border-2 rounded-2xl overflow-hidden">
-							<div class="w-full max-h-[500px] h-[500px]">
+							<div class="w-full h-[500px]">
 								<img src="{{ book.cover }}" alt="Couverture de {{ book.title }}" class="w-full h-[500px] object-cover">
 							</div>
 
@@ -27,7 +27,7 @@
 									{% endfor %}
 								</div>
 
-								<a href="#" class="justify-self-end secondary-button mb-4">Voir</a>
+								<a href="{{ path('app_book_show', {id: book.id}) }}" class="justify-self-end secondary-button mb-4">Voir</a>
 							</div>
 						</article>
 					</li>

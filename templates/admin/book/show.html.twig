@@ -22,7 +22,7 @@
 						<ul class="flex flex-col gap-5">
 							<li class="flex gap-2 items-center">
 								<h4 class="text-lg font-semibold">Date d'édition:</h4>
-								<span>{{ book.editedAt|date('d M Y') }}</span>
+								<span>{{ book.editedAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</span>
 							</li>
 
 							<li class="flex gap-2 items-center">

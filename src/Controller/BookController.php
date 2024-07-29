@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Book;
 use App\Repository\BookRepository;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
@@ -24,6 +25,14 @@ class BookController extends AbstractController
 
         return $this->render('book/index.html.twig', [
             'books' => $books
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_book_show', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function show(?Book $book): Response
+    {
+        return $this->render('book/show.html.twig', [
+            'book' => $book
         ]);
     }
 }
