@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catalogue - Liste des livres
+{% endblock %}
+
+{% block main %}
+	<main class="flex-1 mt-12 w-full pw-10">
+		<section class='flex flex-col items-center gap-4 px-4 pt-12 pb-6 text-center'>
+			<h2 class='text-5xl font-extrabold mb-5'>Catalogue de la médiathèque</h2>
+
+			<ul class="w-full grid grid-cols-4 gap-14 px-20">
+				{% for book in books %}
+					<li>
+						<article class="h-full m-auto flex flex-col items-center border-2 rounded-2xl overflow-hidden">
+							<div class="w-full max-h-[500px] h-[500px]">
+								<img src="{{ book.cover }}" alt="Couverture de {{ book.title }}" class="w-full h-[500px] object-cover">
+							</div>
+
+							<div class="min-h-52 h-full flex flex-col justify-between items-center">
+								<div class="flex flex-col items-center gap-2 p-4">
+									<h3 class="text-2xl font-bold break-words">{{ book.title }}</h3>
+
+									{% for author in book.authors %}
+										<h4 class="text-xl break-words">{{ author.name }}</h4>
+									{% else %}
+										<h4 class="text-xl">Auteur inconnu</h4>
+									{% endfor %}
+								</div>
+
+								<a href="#" class="justify-self-end secondary-button mb-4">Voir</a>
+							</div>
+						</article>
+					</li>
+				{% else %}
+					<li class="row-span-full">Aucun livre trouvé...</li>
+				{% endfor %}
+			</ul>
+
+			{% if books|length > 20 %}
+				{{ pagerfanta(books) }}
+			{% endif %}
+		</section>
+	</main>
+{% endblock %}
