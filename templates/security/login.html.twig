@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion à Biblios
+{% endblock %}
+
+{% block main %}
+	<main class="flex-1 mt-12 w-full">
+		<section class='flex flex-col items-center px-4 pt-12 pb-6'>
+			{% if app.user %}
+				<div class="flex flex-col items-center gap-4">
+					<p class="text-2xl">Vous êtes déjà connecté en tant que 
+												"{{ app.user.firstname }}
+						{{ app.user.lastname }}"</p>
+
+					<a href="{{ path('app_logout') }}" class="secondary-button">Logout</a>
+				</div>
+			{% else %}
+				<h2 class="text-5xl font-extrabold text-center">Formulaire de connexion</h2>
+
+				<form method="post" class="w-1/2 m-auto mt-10">
+					<span class="block text-right text-sm text-gray-600">* champs requis</span>
+
+					{% if error %}
+						<div class="text-red-600 my-2">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+					{% endif %}
+
+					<div>
+						<label for="username" class="block my-2 required">E-mail</label>
+						<input type="email" value="{{ last_username }}" name="_username" id="username" class="rounded-lg w-full" autocomplete="email" required autofocus>
+					</div>
+
+					<div>
+						<label for="password" class="block my-2 required">Mot de passe</label>
+						<input type="password" name="_password" id="password" class="rounded-lg w-full" required>
+					</div>
+
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+					<button class="secondary-button m-auto mt-4" type="submit">
+						Se connecter
+					</button>
+				</form>
+			{% endif %}
+		</section>
+	</main>
+{% endblock %}

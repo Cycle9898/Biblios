@@ -31,7 +31,11 @@
 					</li>
 
 					<li>
-						<a class="p-2 text-white opacity-55 hover:opacity-75" href="#">Se connecter</a>
+						{% if app.user %}
+							<a class="p-2 text-white opacity-55 hover:opacity-75" href="{{ path('app_logout') }}">Se déconnecter</a>
+						{% else %}
+							<a class="p-2 text-white opacity-55 hover:opacity-75" href="{{ path('app_login') }}">Se connecter</a>
+						{% endif %}
 					</li>
 				</ul>
 			</nav>
