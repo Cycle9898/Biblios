@@ -41,3 +41,9 @@ body {
 .secondary-button:hover {
 	background-color: rgb(29 78 216);
 }
+
+.required::after {
+	content: "*";
+	margin-left: 2px;
+	font-size: smaller;
+}

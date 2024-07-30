@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création de compte
+{% endblock %}
+
+{% block main %}
+	<main class="flex-1 mt-12 w-full">
+		<section class='px-4 pt-12 pb-6'>
+			<h2 class="text-5xl font-extrabold text-center">Formulaire de création de compte utilisateur</h2>
+
+			<div class="w-1/2 m-auto mt-10">
+				<span class="block text-right text-sm text-gray-600">* champs requis</span>
+
+				{{ form_start(registrationForm) }}
+				{{ form_row(registrationForm.firstname, {
+                    label: "Prénom",
+					widget_class: "rounded-lg w-full",
+					label_class: "block my-2",
+					error_item_class: "text-red-600"
+                }) }}
+				{{ form_row(registrationForm.lastname, {
+                    label: "Nom",
+					widget_class: "rounded-lg w-full",
+					label_class: "block my-2",
+					error_item_class: "text-red-600"
+                }) }}
+				{{ form_row(registrationForm.username, {
+                    label: "Nom d'utilisateur",
+					widget_class: "rounded-lg w-full mb-4",
+					label_class: "block my-2",
+					error_item_class: "text-red-600"
+                }) }}
+				{{ form_row(registrationForm.email, {
+                    label: "E-mail",
+					widget_class: "rounded-lg w-full",
+					label_class: "block my-2",
+					error_item_class: "text-red-600"
+                }) }}
+				{{ form_row(registrationForm.plainPassword, {
+                    label: "Mot de passe",
+					widget_class: "rounded-lg w-full mb-4",
+					label_class: "block my-2",
+					error_item_class: "text-red-600"
+                }) }}
+				{{ form_row(registrationForm.roles, {
+                    label: "Rôles",
+					widget_class: "rounded-lg w-full mr-2",
+					label_class: "block my-2",
+					error_item_class: "text-red-600"
+                }) }}
+
+				<button type="submit" class="secondary-button m-auto mt-4">Créer un compte</button>
+				{{ form_end(registrationForm) }}
+			</div>
+		</section>
+	</main>
+{% endblock %}
