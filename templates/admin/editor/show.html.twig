@@ -19,7 +19,9 @@
 							{{ editor.id }}</p>
 					</div>
 
-					<a href="{{ path('app_admin_editor_edit', {id: editor.id}) }}" class="secondary-button">Éditer</a>
+					{% if is_granted('ROLE_EDIT_BOOK') %}
+						<a href="{{ path('app_admin_editor_edit', {id: editor.id}) }}" class="secondary-button">Éditer</a>
+					{% endif %}
 				</article>
 			{% else %}
 				<p class="text-xl text-center">L'éditeur demandé n'existe pas...</p>

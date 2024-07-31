@@ -76,7 +76,9 @@
 						<p class="text-start">{{ book.plot }}</p>
 					</div>
 
-					<a href="{{ path('app_admin_book_edit', {id: book.id}) }}" class="secondary-button">Éditer</a>
+					{% if is_granted('ROLE_EDIT_BOOK') %}
+						<a href="{{ path('app_admin_book_edit', {id: book.id}) }}" class="secondary-button">Éditer</a>
+					{% endif %}
 				</article>
 			{% else %}
 				<p class="text-xl text-center">Le livre demandé n'existe pas...</p>

@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/admin/book')]
 class BookController extends AbstractController
@@ -31,10 +32,15 @@ class BookController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADD_BOOK')]
     #[Route('/new', name: 'app_admin_book_new', methods: ['GET', 'POST'])]
     #[Route('/{id}/edit', name: 'app_admin_book_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function new(?Book $book, Request $request, EntityManagerInterface $manager): Response
     {
+        if ($book) {
+            $this->denyAccessUnlessGranted('ROLE_EDIT_BOOK');
+        }
+
         $book ??= new Book();
         $form = $this->createForm(BookType::class, $book);
 

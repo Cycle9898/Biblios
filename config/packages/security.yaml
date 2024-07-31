@@ -9,6 +9,12 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+    role_hierarchy:
+        ROLE_USER: ~
+        ROLE_MODERATOR: ROLE_USER
+        ROLE_ADD_BOOK: ROLE_USER
+        ROLE_EDIT_BOOK: ROLE_ADD_BOOK
+        ROLE_ADMIN: [ROLE_MODERATOR, ROLE_EDIT_BOOK]
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -34,7 +40,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/admin, roles: IS_AUTHENTICATED }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:

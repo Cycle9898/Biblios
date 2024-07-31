@@ -1,14 +1,18 @@
 {% extends 'base.html.twig' %}
 
+{% set extraMargin = is_granted('ROLE_ADD_BOOK') ? '' : ' mb-8' %}
+
 {% block title %}Admin - Page auteurs
 {% endblock %}
 
 {% block main %}
 	<main class="flex-1 mt-12 w-full px-10">
 		<section class='flex flex-col items-center gap-4 px-4 pt-12 pb-6 text-center'>
-			<h2 class='text-5xl font-extrabold'>Page d'administration des auteurs</h2>
+			<h2 class="text-5xl font-extrabold{{ extraMargin }}">Page d'administration des auteurs</h2>
 
-			<a href="{{ path('app_admin_author_new') }}" class="secondary-button self-end my-5">Ajouter un auteur</a>
+			{% if is_granted('ROLE_ADD_BOOK') %}
+				<a href="{{ path('app_admin_author_new') }}" class="secondary-button self-end my-5">Ajouter un auteur</a>
+			{% endif %}
 
 			<h3 class="text-2xl mb-3">Liste des auteurs:</h3>
 
