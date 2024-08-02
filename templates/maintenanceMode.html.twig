@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Site en maintenance
+{% endblock %}
+
+{% block main %}
+	<main class="flex-1 mt-12 w-full pw-10">
+		<section class='flex flex-col items-center gap-8 pt-12 pb-6 text-center'>
+			<div class="max-w-96">
+				<img src="{{ asset('images/maintenance/maintenance.png') }}" alt="Logo de maintenance" class="w-full h-auto">
+			</div>
+
+			<h2 class='text-5xl font-extrabold'>Site en maintenance !</h2>
+
+			<p>Merci de revenir plus tard...</p>
+		</section>
+	</main>
+{% endblock %}
