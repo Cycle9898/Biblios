@@ -1,12 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Admin - Création de compte
+{% set titleAction = app.current_route == 'app_admin_book_new' ? 'création' : 'modification' %}
+
+{% block title %}Admin -
+	{{ titleAction }}
+	de compte
 {% endblock %}
 
 {% block main %}
 	<main class="flex-1 mt-12 w-full">
 		<section class='px-4 pt-12 pb-6'>
-			<h2 class="text-5xl font-extrabold text-center">Formulaire de création de compte utilisateur</h2>
+			<h2 class="text-5xl font-extrabold text-center">Formulaire de
+				{{ titleAction }}
+				de compte utilisateur</h2>
 
 			<div class="w-1/2 m-auto mt-10">
 				<span class="block text-right text-sm text-gray-600">* champs requis</span>
@@ -49,7 +55,7 @@
 					error_item_class: "text-red-600"
                 }) }}
 
-				<button type="submit" class="secondary-button m-auto mt-4">Créer un compte</button>
+				<button type="submit" class="secondary-button m-auto mt-4">Envoyer</button>
 				{{ form_end(registrationForm) }}
 			</div>
 		</section>
