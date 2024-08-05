@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin - Page de l'utilisateur
+	{{ user is not null ? user.fullname : "" }}
+{% endblock %}
+
+{% block main %}
+	<main class="flex-1 mt-12 w-full px-10">
+		<section class='flex flex-col items-center gap-4 px-4 pt-12 pb-6 text-center'>
+			{% if user is not null %}
+				<h2 class='text-5xl font-extrabold'>Page détails d'un utilisateur</h2>
+
+				<article class="w-1/2 m-auto flex flex-col items-center gap-5 border-2 rounded-2xl py-4 px-4">
+					<div class="w-full flex justify-between items-center px-4 my-5">
+						<h3 class="text-3xl font-bold">Nom complet:
+							{{ user.fullname }}</h3>
+
+						<p class="text-sm text-gray-600">Identifiant:
+							{{ user.id }}</p>
+					</div>
+
+					<div class="w-full flex justify-between px-4">
+						<p class="text-xl">E-mail:
+							{{ user.email }}</p>
+
+						<p class="text-lg">Dernière connexion:
+							{{ user.lastConnectionAt is not null ? user.lastConnectionAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") : '-' }}</p>
+					</div>
+
+					<p class="text-lg self-start px-4">Nom d'utilisateur:
+						{{ user.username }}</p>
+
+					<div>
+						<h4 class="text-2xl font-medium my-4">Rôles:</h4>
+
+						<ul class="text-start list-disc list-inside">
+							{% for role in user.roles %}
+								{% if role == "ROLE_USER" %}
+									<li>Utilisateur.trice</li>
+
+								{% elseif role == "ROLE_MODERATOR" %}
+									<li>Modérateur.trice</li>
+
+								{% elseif role == "ROLE_ADD_BOOK" %}
+									<li>Créateur.trice de ressource</li>
+
+								{% elseif role == "ROLE_EDIT_BOOK" %}
+									<li>Correcteur.trice de ressource</li>
+
+								{% elseif role == "ROLE_ADMIN" %}
+									<li>Administrateur.trice</li>
+								{% endif %}
+							{% endfor %}
+						</ul>
+					</div>
+
+
+					<a href="{{ path('app_admin_user_show', {id: user.id}) }}" class="secondary-button">Éditer</a>
+				</article>
+			{% else %}
+				<p class="text-xl text-center">L'utilisateur demandé n'existe pas...</p>
+
+			{% endif %}
+
+			<a href="{{ path('app_admin_user_index') }}" class="secondary-button">Retour à la liste des utilisateurs</a>
+		</section>
+	</main>
+{% endblock %}

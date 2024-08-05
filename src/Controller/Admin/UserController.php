@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\User;
 use App\Repository\UserRepository;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
@@ -26,6 +27,14 @@ class UserController extends AbstractController
 
         return $this->render('admin/user/index.html.twig', [
             'users' => $users
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_admin_user_show', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function show(?User $user): Response
+    {
+        return $this->render('admin/user/show.html.twig', [
+            'user' => $user
         ]);
     }
 }
