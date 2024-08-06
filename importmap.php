@@ -25,4 +25,8 @@ return [
     '@hotwired/turbo' => [
         'version' => '7.3.0',
     ],
+    'deleteModal' => [
+        'path' => './assets/js/deleteModal.js',
+        'entrypoint' => true
+    ]
 ];

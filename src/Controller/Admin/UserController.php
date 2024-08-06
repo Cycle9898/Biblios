@@ -70,4 +70,17 @@ class UserController extends AbstractController
             'user' => $user
         ]);
     }
+
+    #[Route('/{id}/delete', name: 'app_admin_user_delete', requirements: ['id' => '\d+'], methods: ['GET', 'DELETE'])]
+    public function delete(?User $user, EntityManagerInterface $entityManager): Response
+    {
+        if ($user !== null) {
+            $entityManager->remove($user);
+            $entityManager->flush();
+        }
+
+        return $this->render('admin/user/delete.html.twig', [
+            'user' => $user
+        ]);
+    }
 }

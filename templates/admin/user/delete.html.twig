@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin - Utilisateur supprimé
+{% endblock %}
+
+{% block main %}
+	<main class="flex-1 mt-12 w-full pw-10">
+		<section class='flex flex-col items-center gap-4 px-4 pt-12 pb-6 text-center'>
+			{% if user is not null %}
+				<h2 class='text-xl font-extrabold'>L'utilisateur a bien été supprimé !</h2>
+			{% else %}
+				<h2 class="text-xl text-center">L'utilisateur demandé n'existe pas...</h2>
+			{% endif %}
+
+			<a href="{{ path('app_admin_user_index') }}" class="secondary-button my-5">Revenir à la liste des utilisateurs</a>
+		</section>
+	</main>
+{% endblock %}

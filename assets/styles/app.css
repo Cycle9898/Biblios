@@ -25,7 +25,8 @@ body {
 	border-color: #d3d4d5;
 }
 
-.secondary-button {
+.secondary-button,
+.secondary-button--red {
 	display: block;
 	width: fit-content;
 	font-size: 1.2rem;
@@ -40,6 +41,15 @@ body {
 
 .secondary-button:hover {
 	background-color: rgb(29 78 216);
+}
+
+.secondary-button--red {
+	background-color: rgb(220 38 38);
+	border-color: rgb(185 28 28);
+}
+
+.secondary-button--red:hover {
+	background-color: rgb(185 28 28);
 }
 
 form > div > label.required::after {

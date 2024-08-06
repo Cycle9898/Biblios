@@ -55,7 +55,11 @@
 					</div>
 
 
-					<a href="{{ path('app_admin_user_edit', {id: user.id}) }}" class="secondary-button">Éditer</a>
+					<div class="flex items-center gap-4">
+						<a href="{{ path('app_admin_user_edit', {id: user.id}) }}" class="secondary-button">Éditer</a>
+
+						<button id="delete-confirm" type="button" class=" secondary-button--red">Supprimer</button>
+					</div>
 				</article>
 			{% else %}
 				<p class="text-xl text-center">L'utilisateur demandé n'existe pas...</p>
@@ -64,5 +68,21 @@
 
 			<a href="{{ path('app_admin_user_index') }}" class="secondary-button">Retour à la liste des utilisateurs</a>
 		</section>
+
+		<div id="confirm-modal" aria-hidden class="hidden absolute top-0 left-0 h-screen w-screen z-40 justify-center items-center backdrop-blur-lg opacity-0 transition-opacity">
+			<div class="z-50 border-2 rounded-2xl bg-white min-w-[800px] min-h-[400px] flex flex-col justify-center items-center gap-4 p-5">
+				<h2 class="text-3xl">Êtes-vous sûr de vouloir supprimer cet utilisateur ?</h2>
+
+				<p class="text-red-600 text-xl">Cette action est irréversible...</p>
+
+				<div class="flex items-center gap-4 mt-4">
+					<a href="{{ path('app_admin_user_delete', {id: user.id}) }}" class="secondary-button--red">Confirmer</a>
+
+					<button id="cancel-delete" class="secondary-button">Annuler</button>
+				</div>
+			</div>
+		</div>
 	</main>
+	{# Import JS #}
+	{{ importmap('deleteModal') }}
 {% endblock %}
