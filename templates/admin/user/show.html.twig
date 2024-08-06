@@ -28,7 +28,7 @@
 					</div>
 
 					<p class="text-lg self-start px-4">Nom d'utilisateur:
-						{{ user.username }}</p>
+						{{ user.username is not null ? user.username : '-' }}</p>
 
 					<div>
 						<h4 class="text-2xl font-medium my-4">Rôles:</h4>
