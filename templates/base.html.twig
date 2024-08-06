@@ -30,6 +30,12 @@
 						<a class="p-2 text-white opacity-55 hover:opacity-75" href="{{ path('app_book_index') }}">Catalogue</a>
 					</li>
 
+					{% if app.user %}
+						<li>
+							<a class="p-2 text-white opacity-55 hover:opacity-75" href="{{ path('app_admin_index') }}">Panneau d'administration</a>
+						</li>
+					{% endif %}
+
 					<li>
 						{% if app.user %}
 							<a class="p-2 text-white opacity-55 hover:opacity-75" href="{{ path('app_logout') }}">Se déconnecter</a>

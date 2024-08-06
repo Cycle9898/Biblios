@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin - Page d'accueil
+{% endblock %}
+
+{% block main %}
+	<main class="flex-1 mt-12 w-full px-10">
+		<section class='flex flex-col items-center gap-4 px-4 pt-12 pb-6 text-center'>
+			<h2 class="text-5xl font-extrabold mb-4">Page d'administration principale</h2>
+
+			<div class="w-full max-w-[50%] flex flex-col items-center gap-4 border-2 rounded-xl px-4 py-8">
+				<h3 class="text-3xl">Administration des auteurs</h3>
+
+				<p>Voir la liste des auteurs, créer, modifier ou supprimer un auteur (selon vos droits).</p>
+
+				<a href="{{ path('app_admin_author_index') }}" class="secondary-button">Se rendre sur la page</a>
+			</div>
+
+			<div class="w-full max-w-[50%] flex flex-col items-center gap-4 border-2 rounded-xl px-4 py-8">
+				<h3 class="text-3xl">Administration des éditeurs</h3>
+
+				<p>Voir la liste des éditeurs, créer, modifier ou supprimer un éditeur (selon vos droits).</p>
+
+				<a href="{{ path('app_admin_editor_index') }}" class="secondary-button">Se rendre sur la page</a>
+			</div>
+
+			<div class="w-full max-w-[50%] flex flex-col items-center gap-4 border-2 rounded-xl px-4 py-8">
+				<h3 class="text-3xl">Administration des livres</h3>
+
+				<p>Voir la liste des livres, créer, modifier ou supprimer un livre (selon vos droits).</p>
+
+				<a href="{{ path('app_admin_book_index') }}" class="secondary-button">Se rendre sur la page</a>
+			</div>
+
+			{% if is_granted('ROLE_ADMIN') %}
+				<div class="w-full max-w-[50%] flex flex-col items-center gap-4 border-2 border-red-600 rounded-xl px-4 py-8 mt-4">
+					<h3 class="text-3xl">Administration des utilisateurs</h3>
+
+					<p>Voir la liste des utilisateurs, créer, modifier ou supprimer un utilisateur.</p>
+
+					<a href="{{ path('app_admin_user_index') }}" class="secondary-button">Se rendre sur la page</a>
+				</div>
+			{% endif %}
+		</section>
+	</main>
+{% endblock %}
