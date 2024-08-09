@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur - Ressource non accessible
+{% endblock %}
+
+{% block main %}
+	<main class="flex-1 flex justify-center items-center mt-12 w-full h-full px-10">
+		<section class='flex flex-col items-center gap-16'>
+
+			<h2 class='text-9xl font-extrabold text-red-600'>Erreur 401 !</h2>
+
+			<p class="text-3xl">Vous n'avez pas les droits pour accéder à cette ressource !</p>
+
+			<a href="{{ path('app_main') }}" class="secondary-button my-5">Revenir à l'accueil</a>
+		</section>
+	</main>
+{% endblock %}
