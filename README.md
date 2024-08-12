@@ -10,6 +10,8 @@ There is an admin panel to manage books, authors, editors, comments and users.
 
 All data are stored in a PostgreSQL database.
 
+Tailwind CSS is used for styling.
+
 The main goal is to learn how the Symfony framework works.
 
 ## Getting Started
