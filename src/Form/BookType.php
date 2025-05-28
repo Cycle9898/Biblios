@@ -32,7 +32,8 @@ class BookType extends AbstractType
             ->add('plot', TextareaType::class)
             ->add('pageNumber', NumberType::class)
             ->add('status', EnumType::class, [
-                'class' => BookStatus::class
+                'class' => BookStatus::class,
+                'choice_label' => 'getLabel',
             ])
             ->add('editor', EntityType::class, [
                 'class' => Editor::class,
