@@ -78,7 +78,7 @@
 				{% endfor %}
 			</div>
 
-			<a href="#" class="secondary-button mt-12 m-auto">{{ app.user is not null ? "Écrire un commentaire" : "Connectez-vous pour commenter" }}</a>
+			<a href="{{ path('app_comment_add', {id: book.id}) }}" class="secondary-button mt-12 m-auto">Écrire un commentaire</a>
 		</section>
 	</main>
 {% endblock %}

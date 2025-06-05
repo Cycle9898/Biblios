@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Écrire un commentaire{% endblock %}
+
+{% block main %}
+<main class="flex-1 mt-12 w-full px-10">
+    <section class='flex flex-col items-center gap-4 px-4 pt-12 pb-6 text-center'>
+        <h2 class='text-5xl font-extrabold text-center max-w-3xl'>Écrire un commentaire à propos du livre "{{ book.getTitle }}"</h2>
+
+			<div class="w-1/2 m-auto mt-10">
+				<span class="block text-right text-sm text-gray-600">* champs requis</span>
+
+				{{ form_start(form) }}
+				{{ form_row(form.name, {
+					label: "Nom",
+					widget_class: "rounded-lg w-full",
+					label_class: "block my-2",
+					error_item_class: "text-red-600"
+					}) }}
+
+				{{ form_row(form.email, {
+					label: "E-mail",
+					widget_class: "rounded-lg w-full",
+					label_class: "block my-2",
+					error_item_class: "text-red-600"
+					}) }}
+
+				{% if is_granted('ROLE_MODERATOR') %}
+					{{ form_row(form.status, {
+						label: "Statut",
+						widget_class: "rounded-lg w-full",
+						label_class: "block my-2",
+						error_item_class: "text-red-600"
+						}) }}
+				{% endif %}
+
+				{{ form_row(form.content, {
+					label: "Contenu du commentaire",
+					widget_class: "rounded-lg w-full",
+					label_class: "block my-2",
+					error_item_class: "text-red-600"
+					}) }}
+
+					<p class="text-start my-2"><span class="font-bold">Note: </span>votre commentaire devra d'abord être validé par un modérateur avant d'être visible</p>
+
+				<button type="submit" class="secondary-button m-auto mt-4">Envoyer</button>
+				{{ form_end(form, {render_rest: false}) }}
+			</div>
+    </section>
+</main>
+{% endblock %}
