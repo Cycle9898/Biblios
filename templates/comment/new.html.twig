@@ -25,15 +25,6 @@
 					error_item_class: "text-red-600"
 					}) }}
 
-				{% if is_granted('ROLE_MODERATOR') %}
-					{{ form_row(form.status, {
-						label: "Statut",
-						widget_class: "rounded-lg w-full",
-						label_class: "block my-2",
-						error_item_class: "text-red-600"
-						}) }}
-				{% endif %}
-
 				{{ form_row(form.content, {
 					label: "Contenu du commentaire",
 					widget_class: "rounded-lg w-full",
