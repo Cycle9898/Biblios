@@ -47,7 +47,7 @@
 						</div>
 
 						<div>
-							<p class="text-start text-lg">{{ book.plot }}</p>
+							<p class="text-start text-lg whitespace-pre-wrap">{{ book.plot }}</p>
 						</div>
 					</div>
 				</article>
@@ -71,7 +71,7 @@
 							<span class="font-bold">{{ comment.getName }}</span>
 							a écrit:</h4>
 
-						<p>{{ comment.content }}</p>
+						<p class="whitespace-pre-wrap">{{ comment.content }}</p>
 					</article>
 				{% else %}
 					<p class="text-center font-medium">Aucun commentaire pour ce livre...</p>
