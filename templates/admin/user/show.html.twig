@@ -58,7 +58,7 @@
 					<div class="flex items-center gap-4">
 						<a href="{{ path('app_admin_user_edit', {id: user.id}) }}" class="secondary-button">Éditer</a>
 
-						<button id="delete-confirm" type="button" class=" secondary-button--red">Supprimer</button>
+						<button id="delete-confirm" type="button" class="secondary-button--red">Supprimer</button>
 					</div>
 				</article>
 			{% else %}
@@ -76,9 +76,9 @@
 				<p class="text-red-600 text-xl">Cette action est irréversible...</p>
 
 				<div class="flex items-center gap-4 mt-4">
-					<a href="{{ path('app_admin_user_delete', {id: user.id}) }}" class="secondary-button--red">Confirmer</a>
+					<a href="{{ path('app_admin_user_delete', {id: user.id}) }}" class="secondary-button">Confirmer</a>
 
-					<button id="cancel-delete" class="secondary-button">Annuler</button>
+					<button id="cancel-delete" class="secondary-button--red">Annuler</button>
 				</div>
 			</div>
 		</div>
