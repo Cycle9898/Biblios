@@ -72,6 +72,10 @@
 							a écrit:</h4>
 
 						<p class="whitespace-pre-wrap">{{ comment.content }}</p>
+
+						{% if comment.getStatus.getLabel == "Modéré" %}
+							<p class="text-center text-sm text-gray-600">Ce commentaire a été modéré le {{ comment.publishedAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</p>
+						{% endif %}
 					</article>
 				{% else %}
 					<p class="text-center font-medium">Aucun commentaire pour ce livre...</p>
