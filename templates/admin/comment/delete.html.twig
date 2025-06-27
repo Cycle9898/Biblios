@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin - Commentaire supprimé{% endblock %}
+
+{% block main %}
+	<main class="flex-1 mt-12 w-full px-10">
+		<section class='flex flex-col items-center gap-4 px-4 pt-12 pb-6 text-center'>
+			{% if comment is not null %}
+				<h2 class='text-xl font-extrabold'>Le commentaire de {{ comment.getName }} a bien été supprimé !</h2>
+			{% else %}
+				<h2 class="text-xl text-center">Le commentaire demandé n'existe pas...</h2>
+			{% endif %}
+
+			<a href="{{ path('app_admin_comment_index') }}" class="secondary-button my-5">Revenir à la liste des commentaires</a>
+		</section>
+	</main>
+{% endblock %}

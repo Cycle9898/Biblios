@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin - Page du commentaire{{ ((comment is not null) ? ' de ' ~ comment.name : "") }}{% endblock %}
+
+{% block main %}
+<main class="flex-1 mt-12 w-full px-10">
+	<section class="flex flex-col items-center gap-4 px-4 pt-12 pb-6 text-center">
+		<h2 class="text-5xl font-extrabold">
+			Page d'administration du commentaire{{ comment is not null ? " de " ~ comment.name : "" }}
+		</h2>
+		{% if comment is not null %}
+		<article class="w-[75%] flex flex-col items-center gap-2 border-2 rounded-2xl py-4 px-20">
+			<p class="text-sm text-gray-600">Identifiant: {{ comment.id }}</p>
+
+			<div class="w-full flex justify-between items-center">
+				<h4 class="text-xl"><span class="font-bold">Nom: </span>{{ comment.name }}</h4>
+
+				<p><span class="font-bold">Livre: </span>{{ comment.getBook.title }}</p>
+			</div>
+
+			<div class="w-full flex justify-between items-center">
+				<h5>
+					<span class="font-bold">Date de création: </span
+					>{{ comment.createdAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}
+				</h5>
+
+				<p><span class="font-bold">Statut: </span>{{ comment.getStatus.getLabel }}</p>
+			</div>
+
+			<p class="font-bold self-start">Commentaire:</p>
+
+			<p class="self-start text-start text-lg whitespace-pre-wrap">{{ comment.getContent }}</p>
+
+			<div class="flex items-center gap-4 mt-6 mb-2">
+				{% if comment.getStatus.getLabel == 'En attente' %}
+					<a href="{{ path('app_admin_comment_validate', { id: comment.id }) }}" class="secondary-button--green">Valider</a>
+				{% endif %}
+
+				<a href="{{ path('app_admin_comment_edit', { id: comment.id }) }}" class="secondary-button">Modérer</a>
+
+				{% if comment.getStatus.getLabel == 'En attente' %}
+					<button id="delete-confirm" class="secondary-button--red">Supprimer</button>
+				{% endif %}
+			</div>
+		</article>
+		{% else %}
+		<p>Le commentaire recherché n'existe pas...</p>
+		{% endif %}
+
+		<a href="{{ path('app_admin_comment_index') }}" class="secondary-button mt-10"
+			>Retour à la liste des commentaires en attente</a
+		>
+	</section>
+
+	<div id="confirm-modal" aria-hidden class="hidden absolute top-0 left-0 h-screen w-screen z-40 justify-center items-center backdrop-blur-lg opacity-0 transition-opacity">
+		<div class="z-50 border-2 rounded-2xl bg-white min-w-[800px] min-h-[400px] flex flex-col justify-center items-center gap-4 p-5">
+			<h2 class="text-3xl">Êtes-vous sûr de vouloir supprimer ce commentaire ?</h2>
+
+			<p class="text-red-600 text-xl">Cette action est irréversible...</p>
+
+			<div class="flex items-center gap-4 mt-4">
+				{% if comment is not null %}
+					<a href="{{ path('app_admin_comment_delete', {id: comment.id}) }}" class="secondary-button">Confirmer</a>
+				{% endif %}
+
+				<button id="cancel-delete" class="secondary-button--red">Annuler</button>
+			</div>
+		</div>
+	</div>
+</main>
+{# Import JS #}
+{{ importmap('deleteModal') }}
+{% endblock %}

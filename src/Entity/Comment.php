@@ -107,6 +107,11 @@ class Comment
         return $this->content;
     }
 
+    public function getTruncatedContent(): ?string
+    {
+        return mb_strimwidth($this->content, 0, 70, "...");
+    }
+
     public function setContent(string $content): static
     {
         $this->content = $content;

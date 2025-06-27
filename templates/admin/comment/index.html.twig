@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin - Page des commentaires{% endblock %}
+
+{% block main %}
+<main class="flex-1 mt-12 w-full px-10">
+	<section class="flex flex-col items-center gap-4 px-4 pt-12 pb-6 text-center">
+		<h2 class="text-5xl font-extrabold">Page d'administration des commentaires</h2>
+
+		<h3 class="text-2xl mb-3">Liste des commentaires:</h3> {# *********TODO: pending comments filtering********* #}
+
+		<ul class="w-1/2 m-auto flex flex-col gap-2">
+			{% for comment in comments %}
+			<li>
+				<a href="{{ path('app_admin_comment_show', { id: comment.id }) }}">
+					<article class="flex flex-col items-center gap-2 border-2 rounded-2xl py-4 px-20">
+						<p class="text-sm text-gray-600">Identifiant: {{ comment.id }}</p>
+
+						<div class="w-full flex justify-between items-center">
+							<h4 class="text-xl max-w-xs"><span class="font-bold">Nom: </span>{{ comment.name }}</h4>
+
+							<p class="max-w-xs"><span class="font-bold">Livre: </span>{{ comment.getBook.title }}</p>
+						</div>
+
+						<div class="w-full flex justify-between items-center">
+							<h5>
+								<span class="font-bold">Date de création: </span
+								>{{ comment.createdAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}
+							</h5>
+
+							<p><span class="font-bold">Statut: </span>{{ comment.getStatus.getLabel }}</p>
+						</div>
+
+						<p class="self-start text-lg">
+							<span class="font-bold">Commentaire: </span>{{ comment.getTruncatedContent }}
+						</p>
+					</article>
+				</a>
+			</li>
+			{% else %}
+			<li>Aucun commentaire en attente d'être validé...</li>
+			{% endfor %}
+		</ul>
+
+		{% if comments|length > 5 %}
+		{{ pagerfanta(comments) }}
+		{% endif %}
+	</section>
+</main>
+{% endblock %}

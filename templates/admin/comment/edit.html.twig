@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Écrire un commentaire{% endblock %}
+{% block title %}Admin - modérer un commentaire{% endblock %}
 
 {% block main %}
 <main class="flex-1 mt-12 w-full px-10">
     <section class='flex flex-col items-center gap-4 px-4 pt-12 pb-6 text-center'>
-        <h2 class='text-5xl font-extrabold text-center max-w-3xl'>Écrire un commentaire à propos du livre "{{ book.getTitle }}"</h2>
+        <h2 class='text-5xl font-extrabold text-center max-w-3xl'>Modérer le commentaire de {{ comment.getName }}</h2>
 
 			<div class="w-1/2 m-auto mt-10">
 				<span class="block text-right text-sm text-gray-600">* champs requis</span>
@@ -32,9 +32,11 @@
 					error_item_class: "text-red-600"
 					}) }}
 
-					<p class="text-start my-2"><span class="font-bold">Note: </span>votre commentaire devra d'abord être validé par un modérateur avant d'être visible</p>
+                <div class="mt-10 flex gap-4 items-center justify-center m-auto">
+				    <button type="submit" class="secondary-button">Envoyer</button>
 
-				<button type="submit" class="secondary-button m-auto mt-4">Envoyer</button>
+                    <a href="{{ path('app_admin_comment_index') }}" class="secondary-button--red">Annuler</a>
+                </div>
 				{{ form_end(form) }}
 			</div>
     </section>
