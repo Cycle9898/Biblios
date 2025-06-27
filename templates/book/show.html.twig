@@ -64,10 +64,10 @@
 			<h3 class="text-2xl mb-8">Commentaires:</h3>
 
 			<div class="flex flex-col gap-4">
-				{% for comment in book.comments|filter(b => b.status.getLabel != 'En attente') %}
+				{% for comment in book.comments|filter(b => b.status.getLabel != 'En attente')|sort((a, b) => a.createdAt <=> b.createdAt) %}
 					<article class="flex flex-col gap-8 border-2 border-black rounded-xl p-5">
 						<h4 class="text-lg">
-							<span class="text-xl text-gray-700">[{{ comment.publishedAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}]</span>
+							<span class="text-xl text-gray-700">[{{ comment.createdAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}]</span>
 							<span class="font-bold">{{ comment.getName }}</span>
 							a écrit:</h4>
 
