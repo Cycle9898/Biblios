@@ -8,7 +8,7 @@ use App\Form\CommentType;
 use App\Repository\CommentRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
-use Error;
+use Exception;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,14 +24,25 @@ final class CommentController extends AbstractController
     #[Route('', name: 'app_admin_comment_index', methods: ['GET'])]
     public function index(Request $request, CommentRepository $commentRepo): Response
     {
+        $statusFilterValue = (string) $request->query->get('status');
+
+        $commentsQuery = $commentRepo->createQueryBuilder('c');
+        if ($statusFilterValue) {
+            $commentsQuery->andWhere('c.status = :value')->setParameter(':value', $statusFilterValue);
+        }
+
         $comments = Pagerfanta::createForCurrentPageWithMaxPerPage(
-            new QueryAdapter($commentRepo->createQueryBuilder('c')),
-            $request->query->get('page', 1),
+            new QueryAdapter($commentsQuery),
+            (int) $request->query->get('page', 1),
             5
         );
 
+        $statusesValuesAndLabels = CommentStatus::getValuesAndLabels();
+
         return $this->render('admin/comment/index.html.twig', [
-            'comments' => $comments
+            'comments' => $comments,
+            'comment_statuses' => $statusesValuesAndLabels,
+            'filter_value' => $statusFilterValue
         ]);
     }
 
@@ -47,8 +58,10 @@ final class CommentController extends AbstractController
     public function validate(?Comment $comment, EntityManagerInterface $manager): Response
     {
         if (!$comment) {
-            throw new Error("Le commentaire ciblé n'existe pas", 404);
+            throw new Exception("Le commentaire ciblé n'existe pas", 404);
         }
+
+        //TODO: avoid already published comment to be validated
 
         $comment->setStatus(CommentStatus::Published);
         $comment->setPublishedAt(new DateTimeImmutable("now"));
@@ -63,7 +76,7 @@ final class CommentController extends AbstractController
     public function edit(?Comment $comment, EntityManagerInterface $manager, Request $request): Response
     {
         if (!$comment) {
-            throw new Error("Le commentaire ciblé n'existe pas", 404);
+            throw new Exception("Le commentaire ciblé n'existe pas", 404);
         }
 
         $form = $this->createForm(CommentType::class, $comment, ['csrf_protection' => false]);
@@ -92,6 +105,8 @@ final class CommentController extends AbstractController
             $entityManager->remove($comment);
             $entityManager->flush();
         }
+
+        //TODO: avoid already published comment to be deleted
 
         return $this->render('admin/comment/delete.html.twig', [
             'comment' => $comment

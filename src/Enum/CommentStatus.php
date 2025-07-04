@@ -16,4 +16,15 @@ enum CommentStatus: string
             self::Moderated => 'Modéré'
         };
     }
+
+    public static function getValuesAndLabels(): array
+    {
+        $valuesAndLabels = [];
+
+        foreach (self::cases() as $commentStatus) {
+            $valuesAndLabels[$commentStatus->value] = $commentStatus->getLabel();
+        }
+
+        return $valuesAndLabels;
+    }
 }

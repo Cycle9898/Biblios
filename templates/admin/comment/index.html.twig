@@ -7,7 +7,19 @@
 	<section class="flex flex-col items-center gap-4 px-4 pt-12 pb-6 text-center">
 		<h2 class="text-5xl font-extrabold">Page d'administration des commentaires</h2>
 
-		<h3 class="text-2xl mb-3">Liste des commentaires:</h3> {# *********TODO: pending comments filtering********* #}
+		<h3 class="text-2xl mb-3">Liste des commentaires:</h3>
+
+		<div class="self-end me-10 whitespace-nowrap">
+			<label for="status-filter" class="me-2">Filter par status:</label>
+			
+			<select id="status-filter" class="rounded-lg">
+				<option {{filter_value == null ? "selected"}} value="">Tous</option>
+
+				{% for value, label in comment_statuses %}
+					<option {{value == filter_value ? "selected"}} value="{{value}}">{{label}}</option>
+				{% endfor %}
+			</select>
+		</div>
 
 		<ul class="w-1/2 m-auto flex flex-col gap-2">
 			{% for comment in comments %}
@@ -38,7 +50,7 @@
 				</a>
 			</li>
 			{% else %}
-			<li>Aucun commentaire en attente d'être validé...</li>
+			<li>Aucun commentaire n'a été trouvé...</li>
 			{% endfor %}
 		</ul>
 
@@ -47,4 +59,6 @@
 		{% endif %}
 	</section>
 </main>
+{# Import JS #}
+{{ importmap('commentFiltering') }}
 {% endblock %}

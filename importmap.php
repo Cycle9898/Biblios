@@ -24,5 +24,9 @@ return [
     'deleteModal' => [
         'path' => './assets/js/deleteModal.js',
         'entrypoint' => true
+    ],
+    'commentFiltering' => [
+        'path' => './assets/js/commentFiltering.js',
+        'entrypoint' => true
     ]
 ];
