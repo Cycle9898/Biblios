@@ -57,11 +57,9 @@ final class CommentController extends AbstractController
     #[Route('/{id}/validate', name: 'app_admin_comment_validate', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function validate(?Comment $comment, EntityManagerInterface $manager): Response
     {
-        if (!$comment) {
-            throw new Exception("Le commentaire ciblé n'existe pas", 404);
+        if (!$comment || $comment->getStatus()->value != "pending") {
+            throw new Exception("Le commentaire ciblé est déjà validé ou n'existe pas", 404);
         }
-
-        //TODO: avoid already published comment to be validated
 
         $comment->setStatus(CommentStatus::Published);
         $comment->setPublishedAt(new DateTimeImmutable("now"));
@@ -101,12 +99,12 @@ final class CommentController extends AbstractController
     #[Route('/{id}/delete', name: 'app_admin_comment_delete', requirements: ['id' => '\d+'], methods: ['GET', 'DELETE'])]
     public function delete(?Comment $comment, EntityManagerInterface $entityManager): Response
     {
-        if ($comment !== null) {
-            $entityManager->remove($comment);
-            $entityManager->flush();
+        if (!$comment || $comment->getStatus()->value != "pending") {
+            throw new Exception("Le commentaire ciblé ne peut pas être supprimé ou n'existe pas", 404);
         }
 
-        //TODO: avoid already published comment to be deleted
+        $entityManager->remove($comment);
+        $entityManager->flush();
 
         return $this->render('admin/comment/delete.html.twig', [
             'comment' => $comment
