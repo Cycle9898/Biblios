@@ -33,7 +33,7 @@
 				{% endfor %}
 			</ul>
 
-			{% if editors|length > 10 %}
+			{% if editors|length > element_per_page %}
 				{{ pagerfanta(editors) }}
 			{% endif %}
 		</section>

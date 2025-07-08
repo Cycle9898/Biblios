@@ -17,14 +17,17 @@ class BookController extends AbstractController
     #[Route('', name: 'app_book_index', methods: ['GET'])]
     public function index(Request $request, BookRepository $bookRepo): Response
     {
+        $elementsPerPage = 20;
+
         $books = Pagerfanta::createForCurrentPageWithMaxPerPage(
             new QueryAdapter($bookRepo->createQueryBuilder('b')),
             $request->query->get('page', 1),
-            20
+            $elementsPerPage
         );
 
         return $this->render('book/index.html.twig', [
-            'books' => $books
+            'books' => $books,
+            'element_per_page' => $elementsPerPage
         ]);
     }
 

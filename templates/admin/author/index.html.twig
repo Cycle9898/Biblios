@@ -33,7 +33,7 @@
 				{% endfor %}
 			</ul>
 
-			{% if authors|length > 10 %}
+			{% if authors|length > element_per_page %}
 				{{ pagerfanta(authors) }}
 			{% endif %}
 		</section>

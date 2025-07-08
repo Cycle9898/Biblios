@@ -22,14 +22,17 @@ class UserController extends AbstractController
     #[Route('', name: 'app_admin_user_index', methods: ['GET'])]
     public function index(Request $request, UserRepository $userRepo): Response
     {
+        $elementsPerPage = 10;
+
         $users = Pagerfanta::createForCurrentPageWithMaxPerPage(
             new QueryAdapter($userRepo->createQueryBuilder('u')),
             $request->query->get('page', 1),
-            10
+            $elementsPerPage
         );
 
         return $this->render('admin/user/index.html.twig', [
-            'users' => $users
+            'users' => $users,
+            'element_per_page' => $elementsPerPage
         ]);
     }
 

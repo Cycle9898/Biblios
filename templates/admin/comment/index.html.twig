@@ -54,7 +54,7 @@
 			{% endfor %}
 		</ul>
 
-		{% if comments|length > 5 %}
+		{% if comments|length > element_per_page %}
 		{{ pagerfanta(comments) }}
 		{% endif %}
 	</section>

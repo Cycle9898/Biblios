@@ -24,6 +24,8 @@ final class CommentController extends AbstractController
     #[Route('', name: 'app_admin_comment_index', methods: ['GET'])]
     public function index(Request $request, CommentRepository $commentRepo): Response
     {
+        $elementsPerPage = 5;
+
         $statusFilterValue = (string) $request->query->get('status');
 
         $commentsQuery = $commentRepo->createQueryBuilder('c');
@@ -34,13 +36,14 @@ final class CommentController extends AbstractController
         $comments = Pagerfanta::createForCurrentPageWithMaxPerPage(
             new QueryAdapter($commentsQuery),
             (int) $request->query->get('page', 1),
-            5
+            $elementsPerPage
         );
 
         $statusesValuesAndLabels = CommentStatus::getValuesAndLabels();
 
         return $this->render('admin/comment/index.html.twig', [
             'comments' => $comments,
+            'element_per_page' => $elementsPerPage,
             'comment_statuses' => $statusesValuesAndLabels,
             'filter_value' => $statusFilterValue
         ]);

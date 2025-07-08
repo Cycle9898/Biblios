@@ -20,14 +20,17 @@ class EditorController extends AbstractController
     #[Route('', name: 'app_admin_editor_index', methods: ['GET'])]
     public function index(Request $request, EditorRepository $editorRepo): Response
     {
+        $elementsPerPage = 10;
+
         $editors = Pagerfanta::createForCurrentPageWithMaxPerPage(
             new QueryAdapter($editorRepo->createQueryBuilder('e')),
             $request->query->get('page', 1),
-            10
+            $elementsPerPage
         );
 
         return $this->render('admin/editor/index.html.twig', [
-            'editors' => $editors
+            'editors' => $editors,
+            'element_per_page' => $elementsPerPage
         ]);
     }
 

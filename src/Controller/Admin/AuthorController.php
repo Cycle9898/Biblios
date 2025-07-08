@@ -20,6 +20,8 @@ class AuthorController extends AbstractController
     #[Route('', name: 'app_admin_author_index', methods: ['GET'])]
     public function index(Request $request, AuthorRepository $authorRepo): Response
     {
+        $elementsPerPage = 10;
+
         $dates = [];
         if ($request->query->has('start')) {
             $dates['start'] = $request->query->get('start');
@@ -32,11 +34,12 @@ class AuthorController extends AbstractController
         $authors = Pagerfanta::createForCurrentPageWithMaxPerPage(
             new QueryAdapter($authorRepo->findByDateOfBirth($dates)),
             $request->query->get('page', 1),
-            10
+            $elementsPerPage
         );
 
         return $this->render('admin/author/index.html.twig', [
-            'authors' => $authors
+            'authors' => $authors,
+            'element_per_page' => $elementsPerPage
         ]);
     }
 
