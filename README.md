@@ -2,9 +2,9 @@
 
 Biblios is a Symfony application that is used to manage a fictional media library.
 
-You can view the books list, read its details, see if it is available and post comments.
+Visitors can view the books list, read their details, see if they are available and post comments on them.
 
-This website handle users authentication with roles.
+This website handle users authentication with different roles.
 
 There is an admin panel to manage books, authors, editors, comments and users.
 
@@ -12,7 +12,7 @@ All data are stored in a PostgreSQL database.
 
 Tailwind CSS is used for styling.
 
-The main goal is to learn how the Symfony framework works.
+The main goal was to learn how the Symfony framework works.
 
 ## Getting Started
 
@@ -32,9 +32,9 @@ This project uses the following tech stack:
 
 1. Create the database locally or online
 2. Clone the repo onto your computer
-3. Open a terminal in the cloned project folder
+3. Open a terminal in the project folder
 4. Install dependencies with composer: `composer install`
-5. Create .env file and set database url in the "DATABASE_URL" env variable.
+5. Create .env.local file and set the "DATABASE_URL" env variable with a database url.
 6. Start the project with this command:
 
 ```bash
@@ -42,4 +42,4 @@ This project uses the following tech stack:
 symfony server:start
 ```
 
-Open [http://localhost:8000](http://localhost:8000) with your browser to view the website.
+Open [http://localhost:8000](http://localhost:8000) in a browser to test the web app.
